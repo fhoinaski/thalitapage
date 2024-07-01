@@ -21,9 +21,10 @@ import {
 import ImpressiveLoader from "@/components/loading";
 import BackgroundVideo from "@/components/BackgroundVideo";
 import AddressMap from "@/components/AddresMap";
-import FAQ from "@/components/FAQ";
+
 import Link from 'next/link'; // Import Link from Next.js
 import { usePathname } from 'next/navigation';
+import FAQ from "../components/FAQ";
 
 
 const colors = {
@@ -259,23 +260,26 @@ const Header = () => {
     >
       <div className="  mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <h1
-            className="text-xl md:text-lg lg:text-xl font-serif font-bold"
-            style={{ color: colors["text-white"] }}
-          >
-            THALITA CRISTINA <br />
-            <span
-              className="text-sm"
-              style={{
-                color: colors.secondary,
-                marginTop: "-4px",
-                display: "block",
-                lineHeight: "normal",
-              }}
+          <Link
+          href='/'>
+            <h1
+              className="text-xl md:text-lg lg:text-xl font-serif font-bold"
+              style={{ color: colors["text-white"] }}
             >
-              STUDIO & ACADEMY
-            </span>
-          </h1>
+              THALITA CRISTINA <br />
+              <span
+                className="text-sm"
+                style={{
+                  color: colors.secondary,
+                  marginTop: "-4px",
+                  display: "block",
+                  lineHeight: "normal",
+                }}
+              >
+                STUDIO & ACADEMY
+              </span>
+            </h1>
+          </Link>
           <nav className="hidden md:flex items-center space-x-6">
             {renderMenuItems()}
             {renderSocialIcons()}

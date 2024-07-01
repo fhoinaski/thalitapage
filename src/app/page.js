@@ -24,7 +24,7 @@ import AddressMap from "@/components/AddresMap";
 
 import Link from 'next/link'; // Import Link from Next.js
 import { usePathname } from 'next/navigation';
-import FAQ from "../components/FAQ";
+import FAQ from "@/components/FAQ";
 
 
 const colors = {

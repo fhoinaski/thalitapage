@@ -17,7 +17,7 @@ const FAQItem = ({ question, answer }) => {
 
   return (
     <motion.div
-      className="mb-4 bg-white rounded-lg shadow-md overflow-hidden"
+      className="mb-4  rounded-lg shadow-md overflow-hidden"
       initial={false}
       animate={{ backgroundColor: isOpen ? colors.primary : 'white' }}
       transition={{ duration: 0.3 }}
@@ -26,7 +26,7 @@ const FAQItem = ({ question, answer }) => {
         className="w-full px-6 py-4 text-left flex justify-between items-center"
         onClick={toggleOpen}
         style={{ color: colors.secondary }}
-        // whileHover={{ backgroundColor: colors.primary }}
+        whileHover={{ backgroundColor: colors.primary }}
         transition={{ duration: 0.2 }}
       >
         <span className="font-semibold">{question}</span>

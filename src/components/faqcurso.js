@@ -7,7 +7,6 @@ const colors = {
   terciary: "#333333",
   "text-white": "#fff8f2",
   text: "#C09C81",
-  background: "#FFF8F2",
   accent: "#CD853F",
 };
 
@@ -59,6 +58,7 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
+
 const FAQ = () => {
   const faqItems = [
     {
@@ -95,7 +95,6 @@ const FAQ = () => {
     <motion.section
       id="faq"
       className="py-20"
-      // style={{ backgroundColor: colors.background }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -123,5 +122,4 @@ const FAQ = () => {
     </motion.section>
   );
 };
-
 export default FAQ;

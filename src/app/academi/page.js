@@ -520,6 +520,7 @@ const CoursePage = () => {
     '/curso/image1.jpg',
     '/curso/image2.jpg',
     '/curso/image3.jpg',
+    '/curso/image4.jpg',
 
   ];
 

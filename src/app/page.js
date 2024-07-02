@@ -644,11 +644,7 @@ const Footer = () => (
 
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 2000); // Simulating loading time
-  }, []);
 
   return (
     <VideoLoader videoSrc="/backgroud.mp4">

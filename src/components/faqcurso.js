@@ -17,7 +17,7 @@ const FAQItem = ({ question, answer }) => {
 
   return (
     <motion.div
-      className="mb-4  rounded-lg shadow-md overflow-hidden"
+      className="mb-4 bg-white rounded-lg shadow-md overflow-hidden"
       initial={false}
       animate={{ backgroundColor: isOpen ? colors.primary : 'white' }}
       transition={{ duration: 0.3 }}
@@ -95,6 +95,7 @@ const FAQ = () => {
     <motion.section
       id="faq"
       className="py-20"
+      // style={{ backgroundColor: colors.background }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}

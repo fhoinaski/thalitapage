@@ -33,7 +33,7 @@ body {
   }
 }
 .debug-menu {
-  border: 2px solid red !important;
+  border: 2px solid #ceac94 !important;
 }
 
 @keyframes fadeIn {

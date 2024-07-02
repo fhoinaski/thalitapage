@@ -103,7 +103,7 @@ const FAQ = () => {
     <motion.section
       id="faq"
       className="py-20"
-      style={{ backgroundColor: colors.background }}
+      // style={{ backgroundColor: colors.background }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}

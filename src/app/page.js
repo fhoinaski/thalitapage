@@ -22,26 +22,25 @@ import ImpressiveLoader from "@/components/loading";
 import BackgroundVideo from "@/components/BackgroundVideo";
 import AddressMap from "@/components/AddresMap";
 
-import Link from 'next/link'; // Import Link from Next.js
-import { usePathname } from 'next/navigation';
+import Link from 'next/link'; 
 import FAQ from "@/components/questions";
+import VideoLoader from "@/components/VideoLoader";
+import Contact from "@/components/contact";
 
 
 const colors = {
   primary: "#f8dbc5",
-  secondary: "#CE9D81",
+  secondary: "#ceac94",
   terciary: "#333333",
   "text-white": "#fff8f2",
   text: "#C09C81",
   background: "#FFF8F2",
   accent: "#CD853F",
-  "icon-facebook": "#3b5998",
-  "icon-instagram": "#e4405f",
   "icon-whatsapp": "#25d366",
 };
 
 const buttonColors = {
-  color: "#CE9D81",
+  color: "#ceac94",
   hover: "#c09c81",
   text: "#fff8f2",
 };
@@ -99,14 +98,12 @@ const MenuToggle = ({ toggle, isOpen }) => (
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scope, animate] = useAnimate();
-  const menuItems = ["Sobre", "Serviços", "Galeria", "Contato", "FAQ", "Academi"];
+  const menuItems = ["Sobre", "Serviços", "Galeria", "Contato", "FAQ", "Academy"];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
- 
   const scrollToSection = (sectionId) => {
-    if (sectionId === 'academi') {
-      // Use window.location for client-side navigation to /academi
+    if (sectionId === 'academy') {
       window.location.href = '/academi';
     } else {
       const section = document.getElementById(sectionId);
@@ -168,39 +165,29 @@ const Header = () => {
     ]);
   }, [isOpen, animate]);
 
+ 
   const renderMenuItems = (isMobile = false) => (
-    <ul
-      className={`${isMobile ? "flex flex-col gap-2.5 p-4" : "flex space-x-6"}`}
-    >
+    <ul className={`${isMobile ? "flex flex-col gap-2.5 p-4" : "flex space-x-6"}`}>
       {menuItems.map((item) => (
         <li key={item} className={`${isMobile ? "mb-4" : ""}`}>
-          {item.toLowerCase() === 'academi' ? (
-            <Link
-              href="/academi"
-              className={`text-xl md:text-lg lg:text-lg uppercase tracking-wider transition-colors duration-300 ${
-                isMobile ? "block font-bold text-xl p-4" : ""
-              }`}
-              style={{ color: isMobile ? colors.terciary : colors["text-white"] }}
-              onClick={() => setIsOpen(false)}
-            >
-              {item}
-            </Link>
-          ) : (
-            <motion.a
-              href={`#${item.toLowerCase()}`}
-              className={`text-xl md:text-lg lg:text-lg uppercase tracking-wider transition-colors duration-300 ${
-                isMobile ? "block font-bold text-xl p-4" : ""
-              }`}
-              style={{ color: isMobile ? colors.terciary : colors["text-white"] }}
-              whileHover={{ color: colors.accent }}
-              onClick={(e) => {
-                e.preventDefault();
+          <motion.a
+            href={item.toLowerCase() === 'academi' ? '/academi' : `#${item.toLowerCase()}`}
+            className={`text-md md:text-md lg:text-sm uppercase tracking-wider transition-colors duration-300 ${
+              isMobile ? "block font-bold text-xl p-4" : ""
+            }`}
+            style={{ color: isMobile ? colors.terciary : colors["text-white"] }}
+            whileHover={{ color: colors.accent }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (item.toLowerCase() === 'academi') {
+                window.location.href = '/academi';
+              } else {
                 scrollToSection(item.toLowerCase());
-              }}
-            >
-              {item}
-            </motion.a>
-          )}
+              }
+            }}
+          >
+            {item}
+          </motion.a>
         </li>
       ))}
     </ul>
@@ -209,7 +196,7 @@ const Header = () => {
   const renderSocialIcons = () => (
     <div className="flex space-x-4 px-3 py-2 rounded-lg">
       <motion.a
-        href="https://www.instagram.com"
+        href="https://www.instagram.com/thalitacilioscursos?igsh=MTRwY3Nyc3RleDVjdQ=="
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.2 }}
@@ -227,7 +214,7 @@ const Header = () => {
         <Facebook size={20} color={colors["secondary"]} />
       </motion.a>
       <motion.a
-        href="https://wa.me/yourphonenumber"
+        href="https://wa.me/+554896606492"
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.2 }}
@@ -252,12 +239,12 @@ const Header = () => {
 
   return (
     <motion.header
-      ref={scope}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="bg-opacity-90 bg-black opacity-75 fixed w-full z-50 shadow-md"
-    >
+    ref={scope}
+    initial={{ y: -100 }}
+    animate={{ y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    className="bg-opacity-90 bg-black opacity-75 fixed w-full z-50 shadow-md"
+  >
       <div className="  mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link
@@ -641,98 +628,7 @@ const Gallery = () => {
   );
 };
 
-const Contact = () => (
-  <motion.section
-    id="contato"
-    className="py-20"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    transition={{ duration: 0.8 }}
-    viewport={{ once: true }}
-  >
-    <div className="container mx-auto px-4">
-      <h2
-        className="text-3xl md:text-4xl font-serif text-center mb-12"
-        style={{ color: colors.secondary }}
-      >
-        Entre em Contato
-      </h2>
-      <motion.div
-        className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-xl"
-        initial={{ y: 50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <div className="flex flex-col md:flex-row justify-between items-start mb-8">
-          <div className="mb-6 md:mb-0">
-            <h3
-              className="text-xl font-semibold mb-2"
-              style={{ color: colors.secondary }}
-            >
-              Localização
-            </h3>
-            <p className="flex items-center" style={{ color: colors.text }}>
-              <MapPin className="mr-2" size={18} />
-              Rua Patrício Farias, 55, Vitória Eco Office sala 409,
-              Florianópolis/ Itacorubi.
-            </p>
-          </div>
-          <div>
-            <h3
-              className="text-xl font-semibold mb-2"
-              style={{ color: colors.secondary }}
-            >
-              Contato
-            </h3>
-            <p
-              className="flex items-center mb-2"
-              style={{ color: colors.text }}
-            >
-              <Phone className="mr-2" size={18} />
-              (XX) XXXX-XXXX
-            </p>
-            <p className="flex items-center" style={{ color: colors.text }}>
-              <Instagram className="mr-2" size={18} />
-              @thalitacristina_studio
-            </p>
-          </div>
-        </div>
-        <form>
-          <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Seu Nome"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <input
-              type="email"
-              placeholder="Seu Email"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <textarea
-              placeholder="Sua Mensagem"
-              className="w-full p-2 border border-gray-300 rounded"
-              rows="4"
-            ></textarea>
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: buttonColors.hover }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full py-3 rounded text-white text-lg shadow-lg transition-colors duration-300"
-            style={{ backgroundColor: buttonColors.color }}
-          >
-            Enviar Mensagem
-          </motion.button>
-        </form>
-      </motion.div>
-    </div>
-  </motion.section>
-);
+// 
 
 const Footer = () => (
   <footer
@@ -755,30 +651,17 @@ const App = () => {
   }, []);
 
   return (
-    <AnimatePresence>
-      {loading ? (
-        <ImpressiveLoader />
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="font-sans"
-        >
-          <BackgroundVideo videoSrc="http://talita.conectando.site/wp-content/uploads/2024/06/lash_art.mp4" />
-          <Header />
-          <Hero />
-          <About />
-          <Services />
-          <Gallery />
-          <Contact />
-          <AddressMap />
-          <FAQ />
-          <Footer />
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <VideoLoader videoSrc="/backgroud.mp4">
+    <Header />
+    <Hero />
+    <About />
+    <Services />
+    <Gallery />
+    <Contact />
+    <AddressMap />
+    <FAQ />
+    <Footer />
+  </VideoLoader>
   );
 };
 export default App;

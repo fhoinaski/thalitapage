@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const colors = {
   primary: '#f8dbc5',
-  secondary: '#CE9D81',
+  secondary: '#ceac94',
   terciary: '#333333',
   'text-white': '#fff8f2',
   text: '#C09C81',
@@ -69,15 +69,27 @@ const loaderStyles = `
 `;
 
 const ElegantLoader = ({ onComplete }) => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-      if (onComplete) onComplete();
-    }, 3000); // Loader durará 3 segundos
+    const checkLastShown = () => {
+      const lastShown = localStorage.getItem('loaderLastShown');
+      const currentTime = new Date().getTime();
+      
+      if (!lastShown || currentTime - parseInt(lastShown, 10) > 12 * 60 * 60 * 1000) {
+        localStorage.setItem('loaderLastShown', currentTime.toString());
+        setVisible(true);
+        const timer = setTimeout(() => {
+          setVisible(false);
+          if (onComplete) onComplete();
+        }, 3000); // Loader durará 3 segundos
+        return () => clearTimeout(timer);
+      } else {
+        if (onComplete) onComplete();
+      }
+    };
 
-    return () => clearTimeout(timer);
+    checkLastShown();
   }, [onComplete]);
 
   if (!visible) return null;
